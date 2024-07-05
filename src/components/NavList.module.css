@@ -1,0 +1,29 @@
+.nav_bar {
+    background-color: #053e53;
+    height: 4.2rem;
+    width: 100%;
+
+    /* display: flex; */
+}
+
+.nav_bar_list {
+    margin: 0 auto;
+    max-width: 1440px;
+
+    display: flex;
+    /* padding: 1rem 0; */
+    /* justify-content: space-between; */
+}
+
+ul {
+    display: flex;
+    padding: 1rem 0;
+}
+
+.nav_link {
+    font-size: 1.3rem;
+    list-style: none;
+    color: #6cc;
+    width: fit-content;
+    margin-right: 1.5rem;
+}
