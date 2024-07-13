@@ -1,0 +1,16 @@
+*,
+body {
+    font-family: '微軟正黑體';
+    letter-spacing: 3px;
+    font-weight: 600;
+
+    text-align: center;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: auto;
+    /* background-color: #666; */
+}

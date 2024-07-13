@@ -1,0 +1,43 @@
+.content_img {
+    display: flex;
+    justify-content: space-around;
+
+    /* width: 100%; */
+    max-height: 70vh;
+    /* margin: 2.5rem 0rem; */
+    /* background-color: #29352f; */
+    overflow: hidden;
+}
+
+.content_img :hover {
+    /* -webkit-transform: scale(1.1);
+    transform: scale(1.1); */
+
+    background-color: #6161618c;
+
+    /* box-shadow: 0 0 20px 10px rgb(1, 90, 53); */
+    width: 50%;
+}
+
+.img {
+    height: 680px;
+    width: 50%;
+    border-radius: 5px;
+    transition: all 0.5s ease-out;
+
+    cursor: pointer;
+}
+
+.content_caption {
+    /* display: inline-block; */
+
+    padding: 50px 50px 25px 50px;
+}
+
+.content_p {
+    padding: 10px 0;
+}
+
+hr {
+    width: 20%;
+}

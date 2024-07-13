@@ -1,0 +1,29 @@
+.content_plants {
+    display: flex;
+    overflow: scroll;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    width: 100%;
+
+    padding: 5px 30px 20px 20px;
+}
+.button {
+    position: absolute;
+}
+.button_left {
+    position: relative;
+    top: 150px;
+    left: 1%;
+
+    /* width: 500px; */
+    height: 60px;
+}
+
+.button_right {
+    position: relative;
+    top: 150px;
+    left: 97%;
+
+    /* width: 50px; */
+    height: 60px;
+}

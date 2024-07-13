@@ -1,0 +1,14 @@
+.content_plant {
+    display: inline-block;
+    margin: 20px 38px 0 0;
+    /* overflow: hidden; */
+}
+
+.plant_img {
+    display: flex;
+    width: 20vh;
+}
+
+.content_h2 {
+    margin: 10px;
+}
