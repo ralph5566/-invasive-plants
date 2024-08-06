@@ -2,11 +2,18 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import App, { loader as plantsLoader } from './routes/App.jsx'
+import App, { Loader as plantsLoader } from './routes/pages/App.jsx'
 import './index.css'
-import RootLayout from './routes/RootLayout.jsx'
-import Illustrate from './routes/Illustrate.jsx'
-import Sign from './routes/Sign.jsx'
+import SignProvider from './Sign/Sign.jsx'
+
+import RootLayout from './routes/pages/RootLayout.jsx'
+import Illustrate from './routes/pages/Illustrate.jsx'
+
+import Game, { Loader as questionsLoader } from './routes/pages/Game.jsx'
+import About from './routes/pages/About.jsx'
+import Special from './routes/pages/Special.jsx'
+
+// const [isSign, setIsSign] = useState(false)
 
 const router = createBrowserRouter([
     {
@@ -17,19 +24,24 @@ const router = createBrowserRouter([
                 path: '/',
                 element: <App />,
                 loader: plantsLoader,
-                children: [{ path: '/login', element: <Sign /> }],
             },
             {
                 path: '/plants',
-                loader: plantsLoader,
                 element: <Illustrate />,
+                loader: plantsLoader,
             },
+
+            { path: '/game', element: <Game />, loader: questionsLoader },
+            { path: '/about', element: <About /> },
+            { path: '/special', element: <Special /> },
         ],
     },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <SignProvider>
+            <RouterProvider router={router} />
+        </SignProvider>
     </React.StrictMode>
 )

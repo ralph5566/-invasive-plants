@@ -1,0 +1,69 @@
+.content_plants {
+    display: inline-flex;
+    text-decoration: none;
+
+    width: 100%;
+    margin: 0px;
+
+    /* padding: 5%; */
+    overflow: hidden;
+}
+.button {
+    position: absolute;
+}
+
+.details {
+    display: inline-flex;
+    width: 90%;
+    /* flex-direction: row; */
+    justify-content: center;
+    margin: 15px auto;
+}
+
+.img {
+    width: 40%;
+}
+
+.plant_content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: auto 30px;
+    color: #d1a952;
+}
+
+.plant_name {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    line-height: 2;
+}
+
+.plant_title {
+    font-style: oblique;
+    margin: 10px 0;
+}
+
+.plant_desc {
+    margin: 20px 0;
+}
+
+.content_plant {
+    display: inline-block;
+    margin: 0px 20px;
+    /* overflow: hidden; */
+    text-decoration: none;
+    color: #c3f3f3;
+}
+
+.content_plant :hover {
+    color: #d1a952;
+}
+
+.plant_img {
+    /* border: 1px solid #c3f3f3; */
+    border-radius: 10px;
+    display: flex;
+    width: 8rem;
+    padding: 5px;
+}
