@@ -14,3 +14,19 @@ const RootLayout = () => {
 }
 
 export default RootLayout
+
+export async function Action({ request }) {
+    const formData = request.formData()
+    const signData = Object.fromEntries(formData) // * {account:"...",password:'...}
+    const response = await fetch('http://localhost:3000/sign', {
+        method: 'POST',
+        body: JSON.stringify(signData),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    if (!response.ok) {
+        throw new Error({ message: '登入錯誤' })
+    }
+    return redirect('/')
+}

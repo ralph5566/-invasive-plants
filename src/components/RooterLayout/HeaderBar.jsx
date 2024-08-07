@@ -3,7 +3,7 @@ import { useContext } from 'react'
 
 import { CheckSign } from '../../Sign/Sign'
 
-const HeaderBar = ({ onSign, onModal }) => {
+const HeaderBar = ({ onSign, onModal, onSignUp }) => {
     const { isSign, signChange } = useContext(CheckSign)
     let nav_link = 'pointer-events-auto text-lg mr-4 cursor-pointer'
     const isActive = false
@@ -51,12 +51,12 @@ const HeaderBar = ({ onSign, onModal }) => {
                                 </button>
                             </li>
                             <li className=" text-lightBlue mr-5 cursor-pointer shadow-2m hover:shadow-3m">
-                                <Link
-                                    onClick
+                                <button
+                                    onClick={onSignUp}
                                     className="text-lg rounded-lg border-none px-6 py-1"
                                 >
                                     註冊
-                                </Link>
+                                </button>
                             </li>
                         </>
                     )}
@@ -77,16 +77,13 @@ const HeaderBar = ({ onSign, onModal }) => {
             </header>
 
             <header className="hidden max-md:flex justify-center p-20 w-full border border-yy bg-black">
-                <button
-                    className="w-10 h-10  absolute top-14 right-6 text-yy text-4xl rounded border-white"
-                    onClick={onModal}
-                >
-                    X
+                <button className=" absolute mt-auto right-5" onClick={onModal}>
+                    <img src="/img/IMG_bar.png" alt="bar" />
                 </button>
                 <Link to="/">
                     <img
                         alt="LOGO"
-                        src="/img/IMG_logo.png"
+                        src="/img/IMG_logo03.png"
                         className="w-40 relative top-px cursor-pointer "
                     />
                 </Link>

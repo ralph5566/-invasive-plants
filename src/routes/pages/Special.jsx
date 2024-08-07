@@ -53,6 +53,7 @@ const Special = () => {
             {showModal && (
                 <SpecialDetail
                     onShow={showModalHandler}
+                    showModal={showModal}
                     img={specialImg[imgNo].img}
                 />
             )}

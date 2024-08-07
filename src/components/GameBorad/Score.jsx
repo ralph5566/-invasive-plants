@@ -1,6 +1,7 @@
 const Score = ({ score, onStart }) => {
     let Img
     let cssClass = 'mx-auto'
+
     if (score >= 90) {
         Img = '/img/IMG_005.jpg'
         cssClass += ' w-1/2 max-md:w-5/6'

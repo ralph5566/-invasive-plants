@@ -1,9 +1,9 @@
 import Modal from '../Modal/Modal'
 
-const SpecialDetail = ({ onShow, img }) => {
+const SpecialDetail = ({ onShow, img, showModal }) => {
     return (
         <>
-            <Modal open={onShow}>
+            <Modal open={showModal}>
                 <div className="bg-content-bgc bg-contain w-full">
                     <button
                         className=" absolute w-10 h-10 top-5 right-4 t text-4xl"

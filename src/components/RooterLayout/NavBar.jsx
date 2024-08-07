@@ -1,7 +1,14 @@
 import { Link } from 'react-router-dom'
 import Modal from '../Modal/Modal'
 
-const NavBar = ({ showModal, onModal, onSign, isSign, signOut }) => {
+const NavBar = ({
+    isSign,
+    showModal,
+    onModal,
+    onSign,
+    onSignUp,
+    onSignOut,
+}) => {
     let nav_link = 'hover:text-yy py-1'
     const isActive = false
 
@@ -65,28 +72,28 @@ const NavBar = ({ showModal, onModal, onSign, isSign, signOut }) => {
                         {!isSign && (
                             <div className="flex mt-8">
                                 <button
-                                    className="text-center rounded-lg border-none px-3 py-1 mx-3 shadow-2m  hover:shadow-3m hover:text-yy "
                                     onClick={onSign}
+                                    className="text-center rounded-lg border-none px-3 py-1 mx-3 shadow-2m  hover:shadow-3m hover:text-yy "
                                 >
                                     登 入
                                 </button>
-                                <Link
-                                    onClick={showModal}
+                                <button
+                                    onClick={onSignUp}
                                     className="text-center rounded-lg border-none px-3 py-1 mx-3  shadow-2m  hover:shadow-3m hover:text-yy"
                                 >
                                     註 冊
-                                </Link>
+                                </button>
                             </div>
                         )}
 
                         {isSign && (
                             <div className="flex mt-8">
-                                <Link
-                                    onClick={signOut}
+                                <button
+                                    onClick={onSignOut}
                                     className="text-center rounded-lg border-none px-3 py-1 mx-auto  shadow-2m  hover:shadow-3m hover:text-yy "
                                 >
                                     登 出
-                                </Link>
+                                </button>
                             </div>
                         )}
                     </div>

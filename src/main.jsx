@@ -12,6 +12,7 @@ import Illustrate from './routes/pages/Illustrate.jsx'
 import Game, { Loader as questionsLoader } from './routes/pages/Game.jsx'
 import About from './routes/pages/About.jsx'
 import Special from './routes/pages/Special.jsx'
+import Error from './routes/pages/Error.jsx'
 
 // const [isSign, setIsSign] = useState(false)
 
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
             { path: '/game', element: <Game />, loader: questionsLoader },
             { path: '/about', element: <About /> },
             { path: '/special', element: <Special /> },
+            { path: '/', element: <Error /> },
         ],
     },
 ])

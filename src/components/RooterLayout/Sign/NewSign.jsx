@@ -1,69 +1,107 @@
 import { useState } from 'react'
-import classes from './Sign.module.css'
+import { Form } from 'react-router-dom'
+import { useContext } from 'react'
 
-import { NavLink } from 'react-router-dom'
+import Modal from '../../Modal/Modal'
+import Input from '../../Tools/Input'
+import Button from '../../Tools/Button'
+import { CheckSign } from '../../../Sign/Sign'
 
-function Sign({ onCancel, onSignIn }) {
-    const [enterAccount, setEnterAccount] = useState('')
-    const [enterPassword, setEnterPassword] = useState('')
+function Sign({ onCancel, onSignUp, showModal }) {
+    let { signUp } = useContext(CheckSign)
 
-    function accountHandler(event) {
+    const [enterAccount, setEnterAccount] = useState({
+        account: '',
+        password: '',
+    })
+    const [checkPassword, setCheckPassword] = useState('')
+
+    function handlerChange(inputIdentifier, newValue) {
         console.log(enterAccount)
-        setEnterAccount(event.target.value)
+        setEnterAccount((prevUserInput) => {
+            return {
+                ...prevUserInput,
+                [inputIdentifier]: newValue,
+            }
+        })
     }
 
-    function passwordHandler(event) {
-        setEnterPassword(event.target.value)
+    function passwordCheckHandler(event) {
+        setCheckPassword(event.target.value)
+        if (checkPassword !== enterAccount.password) {
+            throw new Error({ message: 'Password Error' })
+        }
     }
 
     function submitHandler(evt) {
         evt.preventDefault()
         const postSign = {
-            account: enterAccount,
-            password: enterPassword,
+            account: enterAccount.account,
+            password: enterAccount.password,
         }
-        console.log(postSign)
-        onSignIn(postSign)
-        onCancel()
+        if (checkPassword !== enterAccount.password) {
+            throw new Error({ message: 'Password Error' })
+        }
+
+        signUp(postSign)
+        onSignUp()
     }
 
     return (
-        <form className={classes.form} onSubmit={submitHandler}>
-            <p>
-                <label htmlFor="account">帳號</label>
-                <input id="account" required onChange={accountHandler} />
-            </p>
-            <p>
-                <label htmlFor="password">密碼</label>
-                <input
-                    type="password"
-                    id="password"
-                    required
-                    onChange={passwordHandler}
-                />
-            </p>
-            <p>
-                <label htmlFor="password">確認密碼</label>
-                <input
-                    type="password"
-                    id="password"
-                    required
-                    onChange={passwordHandler}
-                />
-            </p>
-            <p className={classes.actions}>
-                <NavLink type="submit" className={classes.button}>
-                    註冊
-                </NavLink>
-                <NavLink
-                    type="button"
-                    className={classes.button}
-                    onClick={onCancel}
+        <>
+            <Modal open={showModal}>
+                <Form
+                    className="p-10 w-10/12 max-lg:w-full mx-auto rounded-xl max-sm:p-7"
+                    onSubmit={submitHandler}
                 >
-                    關閉
-                </NavLink>
-            </p>
-        </form>
+                    <img
+                        alt="LOGO"
+                        src="/img/IMG_logo02.png"
+                        className="mx-auto w-36 pb-2 max-sm:hidden"
+                    />
+                    <Input
+                        id="user"
+                        name="帳號"
+                        value={enterAccount.account}
+                        auto="user"
+                        signUp
+                        onChange={(evt) =>
+                            handlerChange('account', evt.target.value)
+                        }
+                    />
+                    <Input
+                        id="password"
+                        name="密碼"
+                        type="password"
+                        value={enterAccount.password}
+                        auto="current-password"
+                        signUp
+                        onChange={(evt) =>
+                            handlerChange('password', evt.target.value)
+                        }
+                    />
+                    <Input
+                        id="passwordCheck"
+                        name="確認密碼"
+                        type="password"
+                        value={checkPassword}
+                        signUp
+                        onChange={passwordCheckHandler}
+                    />
+                    <p className="flex justify-end max-lg:justify-center gap-2 mt-4 max-sm:mt-0">
+                        <Button type="submit">註 冊</Button>
+
+                        <button
+                            type="button"
+                            className=" text-center mt-7 cursor-pointer px-6 py-0.5 rounded-lg border-none bg-purple hover:bg-hoverPup hover:text-yy"
+                            onClick={onCancel}
+                        >
+                            關 閉
+                        </button>
+                    </p>
+                </Form>
+            </Modal>
+        </>
     )
 }
 

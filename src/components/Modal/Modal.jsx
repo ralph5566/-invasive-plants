@@ -23,8 +23,8 @@ const Modal = ({ children, open }) => {
             />
             <dialog
                 ref={dialog}
+                // open={open}
                 // onClose={open}
-                // open={true}
                 // className=" flex mx-auto my-auto  bg-bgcB h-full w-screen"
                 className="flex w-1/2 max-md:w-[85%] h-3/4 max-ss:h-2/3 border-none rounded-lg  p-0 overflow-hidden mx-auto mt-32"
             >

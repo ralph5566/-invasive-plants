@@ -45,6 +45,7 @@ const Gallery = () => {
                     // plantModal={showDetail}
                     onPlant={showDetailHandler}
                     no={plantNo}
+                    plantModal={showDetail}
                 />
             )}
         </>

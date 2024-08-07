@@ -33,7 +33,7 @@ export default {
             bermuda: '#78dcca',
             black: '#000',
 
-            bgcB: 'rgba(0, 0, 0, 0.6)',
+            bgcB: 'rgba(0, 0, 0, 0.7)',
 
             lightBlue: '#c3f3f3',
             deepBlue: '#134B70',

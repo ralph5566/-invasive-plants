@@ -1,8 +1,12 @@
-const Input = ({ id, name, type, value, auto, ...props }) => {
+const Input = ({ id, name, type, value, auto, signUp = false, ...props }) => {
+    let cssCss = 'block my-3 text-lightBlue'
+    if (signUp) {
+        cssCss = 'block my-1 text-lightBlue'
+    }
     return (
         <>
             <p>
-                <label className="block my-3 text-lightBlue" htmlFor={id}>
+                <label className={cssCss} htmlFor={id}>
                     {name}
                 </label>
                 <input
