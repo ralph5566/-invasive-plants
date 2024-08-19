@@ -5,19 +5,49 @@ const Special = () => {
     const [showModal, setShowModal] = useState(false)
     const [imgNo, setImgNo] = useState('')
 
+    // const specialImg = [
+    //     { img: './img/IMG_MO01.jpg', name: '大花咸豐草' },
+    //     { img: './img/IMG_MO02.jpg', name: '巴西水竹草' },
+    //     { img: './img/IMG_MO04.jpg', name: '水芙蓉' },
+    //     { img: './img/IMG_MO12.jpg', name: '日本菟絲子' },
+    //     { img: './img/IMG_MO10.jpg', name: '銀膠菊' },
+    //     { img: './img/IMG_MO03.jpg', name: '小花蔓澤蘭' },
+    //     { img: './img/IMG_MO07.jpg', name: '馬纓丹' },
+    //     { img: './img/IMG_MO05.jpg', name: '布袋蓮' },
+    //     { img: './img/IMG_MO06.jpg', name: '互花米草' },
+    //     { img: './img/IMG_MO09.jpg', name: '美洲含羞草' },
+    //     { img: './img/IMG_MO11.jpg', name: '銀合歡' },
+    //     { img: './img/IMG_MO08.jpg', name: '豬草' },
+    // ]
+
     const specialImg = [
-        { img: './img/IMG_MO01.jpg', name: '大花咸豐草' },
-        { img: './img/IMG_MO02.jpg', name: '巴西水竹草' },
-        { img: './img/IMG_MO04.jpg', name: '水芙蓉' },
-        { img: './img/IMG_MO12.jpg', name: '日本菟絲子' },
-        { img: './img/IMG_MO10.jpg', name: '銀膠菊' },
-        { img: './img/IMG_MO03.jpg', name: '小花蔓澤蘭' },
-        { img: './img/IMG_MO07.jpg', name: '馬纓丹' },
-        { img: './img/IMG_MO05.jpg', name: '布袋蓮' },
-        { img: './img/IMG_MO06.jpg', name: '互花米草' },
-        { img: './img/IMG_MO09.jpg', name: '美洲含羞草' },
-        { img: './img/IMG_MO11.jpg', name: '銀合歡' },
-        { img: './img/IMG_MO08.jpg', name: '豬草' },
+        {
+            img: 'http://localhost:3000/images/IMG_MO01.jpg',
+            name: '大花咸豐草',
+        },
+        {
+            img: 'http://localhost:3000/images/IMG_MO02.jpg',
+            name: '巴西水竹草',
+        },
+        { img: 'http://localhost:3000/images/IMG_MO04.jpg', name: '水芙蓉' },
+        {
+            img: 'http://localhost:3000/images/IMG_MO12.jpg',
+            name: '日本菟絲子',
+        },
+        { img: 'http://localhost:3000/images/IMG_MO10.jpg', name: '銀膠菊' },
+        {
+            img: 'http://localhost:3000/images/IMG_MO03.jpg',
+            name: '小花蔓澤蘭',
+        },
+        { img: 'http://localhost:3000/images/IMG_MO07.jpg', name: '馬纓丹' },
+        { img: 'http://localhost:3000/images/IMG_MO05.jpg', name: '布袋蓮' },
+        { img: 'http://localhost:3000/images/IMG_MO06.jpg', name: '互花米草' },
+        {
+            img: 'http://localhost:3000/images/IMG_MO09.jpg',
+            name: '美洲含羞草',
+        },
+        { img: 'http://localhost:3000/images/IMG_MO11.jpg', name: '銀合歡' },
+        { img: 'http://localhost:3000/images/IMG_MO08.jpg', name: '豬草' },
     ]
 
     function showModalHandler(no) {

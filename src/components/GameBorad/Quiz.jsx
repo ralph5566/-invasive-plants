@@ -14,7 +14,9 @@ const Quiz = ({ quiz, onAnswer, answerState, userAnswer, onTimeout }) => {
             <div className="flex flex-col w-full mx-auto">
                 <img
                     className="w-[19%] max-md:w-1/2 mx-auto mt-8 max-xl:mt-14 max-md:my-3"
-                    src={quiz.img}
+                    // src={quiz.img}
+                    src={`http://localhost:3000/${quiz.img}`}
+                    alt={quiz.plant}
                 />
 
                 <div className="flex flex-col mx-auto my-0 w-5/6">

@@ -37,21 +37,42 @@ function ContentSwiper() {
                 <SwiperSlide className="flex justify-center items-center">
                     <img
                         alt="01"
-                        src="/img/IMG_001.jpg"
+                        // src="/img/IMG_001.jpg"
+                        src={`http://localhost:3000/images/IMG_001.jpg`}
                         className="flex justify-center items-center w-full overflow-hidden"
                     ></img>
                 </SwiperSlide>
                 <SwiperSlide className="flex justify-center items-center">
-                    <img alt="02" src="/img/IMG_002.jpg" className={kk}></img>
+                    <img
+                        alt="02"
+                        // src="/img/IMG_002.jpg"
+                        src={`http://localhost:3000/images/IMG_002.jpg`}
+                        className={kk}
+                    ></img>
                 </SwiperSlide>
                 <SwiperSlide className="bottom-24 max-lg:bottom-0">
-                    <img alt="03" src="/img/IMG_003.JPG" className={kk}></img>
+                    <img
+                        alt="03"
+                        // src="/img/IMG_003.JPG"
+                        src={`http://localhost:3000/images/IMG_003.JPG`}
+                        className={kk}
+                    ></img>
                 </SwiperSlide>
                 <SwiperSlide className="bottom-14 max-lg:bottom-0">
-                    <img alt="04" src="/img/IMG_004.jpg" className={kk}></img>
+                    <img
+                        alt="04"
+                        // src="/img/IMG_004.jpg"
+                        src={`http://localhost:3000/images/IMG_004.jpg`}
+                        className={kk}
+                    ></img>
                 </SwiperSlide>
                 <SwiperSlide className="bottom-0">
-                    <img alt="06" src="/img/IMG_006.jpg" className={kk}></img>
+                    <img
+                        alt="06"
+                        // src="/img/IMG_006.jpg"
+                        src={`http://localhost:3000/images/IMG_006.jpg`}
+                        className={kk}
+                    ></img>
                 </SwiperSlide>
             </Swiper>
         </>

@@ -1,5 +1,6 @@
 // import { useState, useEffect } from 'react'
 import { Link, useLoaderData } from 'react-router-dom'
+import { useState } from 'react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules'
@@ -11,11 +12,12 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 
 import Plants from '../../components/Plants/Plants'
-import { useState } from 'react'
+// import PLANTS from '../../../public/plants'
 
 function Illustrate() {
     const screenW = Math.floor(document.documentElement.clientWidth / 250)
     const plants = useLoaderData()
+    // const plants = PLANTS
 
     const [no, setNo] = useState('0')
 
@@ -50,7 +52,8 @@ function Illustrate() {
                                     onClick={() => plantHandler(index)}
                                 >
                                     <img
-                                        src={plant.img}
+                                        // src={plant.img}
+                                        src={`http://localhost:3000/${plant.img}`}
                                         className="w-40 mx-20 my-0 max-md:mx-auto"
                                         alt={plant.name}
                                     />
@@ -69,7 +72,8 @@ function Illustrate() {
                 <main className="inline-flex max-md:flex-col w-full justify-center my-28 max-lg:mt-20 max-md:mt-5 max-xl:mb-6 ">
                     <div className=" relative w-1/2 max-md:w-full">
                         <img
-                            src={plantNo.img}
+                            // src={plantNo.img}
+                            src={`http://localhost:3000/${plantNo.img}`}
                             className="mx-auto w-2/3"
                             alt={plantNo.name}
                         />

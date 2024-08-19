@@ -1,7 +1,17 @@
-const Input = ({ id, name, type, value, auto, signUp = false, ...props }) => {
+const Input = ({
+    id,
+    name,
+    type,
+    value,
+    length,
+    auto,
+    isSignUp = false,
+    onBlur,
+    ...props
+}) => {
     let cssCss = 'block my-3 text-lightBlue'
-    if (signUp) {
-        cssCss = 'block my-1 text-lightBlue'
+    if (isSignUp) {
+        cssCss = 'block my-[2px] text-lightBlue'
     }
     return (
         <>
@@ -12,11 +22,13 @@ const Input = ({ id, name, type, value, auto, signUp = false, ...props }) => {
                 <input
                     className="block w-full p-2 rounded-lg border-none bg-bgcB text-left"
                     id={id}
-                    name={type}
+                    name={id}
                     type={type === 'password' ? type : 'text'}
-                    value={value}
+                    minLength={length}
                     required
                     autoComplete={auto}
+                    value={value}
+                    onBlur={onBlur}
                     {...props}
                 />
             </p>

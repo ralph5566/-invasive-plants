@@ -12,12 +12,13 @@ const GameBoard = ({ questions }) => {
     const activeQuesIndex =
         answerState === '' ? userAnswers.length : userAnswers.length - 1
     const quiz = newQuestions[activeQuesIndex]
-    const quizComplete = activeQuesIndex <= 9
+    const quizComplete = activeQuesIndex > 0
 
-    console.log(userAnswers)
-    console.log(quiz.no)
-
+    // console.log(userAnswers)
+    // console.log(quiz.no)
     // console.log(score)
+
+    const hightScore = JSON.parse(localStorage.getItem('HightScore'))
 
     const answerHandler = useCallback(
         function answerHandler(no) {
@@ -58,9 +59,17 @@ const GameBoard = ({ questions }) => {
         console.log(newQuestions)
     }
 
-    if (!quizComplete) {
+    if (quizComplete) {
+        if (hightScore === null) {
+            localStorage.setItem(`HightScore`, JSON.stringify({ score }))
+        }
+
+        if (hightScore.score < score) {
+            localStorage.removeItem('HightScore')
+            localStorage.setItem(`HightScore`, JSON.stringify({ score }))
+        }
         return (
-            <div id="summary" className="mt-20 max-md:mt-10">
+            <div id="summary" className="mt-16 max-md:my-16">
                 <Score onStart={gameStartHandler} score={score} />
             </div>
         )

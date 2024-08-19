@@ -1,10 +1,11 @@
 import { useCallback, useContext, useState } from 'react'
 
-import { CheckSign } from '../../Sign/Sign'
+import CheckSign from '../../Context/Sign'
 import NavBar from './NavBar'
 import Sign from './Sign/Sign'
 import NewSign from './Sign/NewSign'
 import HeaderBar from './HeaderBar'
+import Button from '../Tools/Button'
 
 const Header = () => {
     const { isSign, signChange } = useContext(CheckSign)
@@ -33,6 +34,10 @@ const Header = () => {
         [signUpModal]
     )
 
+    function handlerToTop() {
+        window.scrollTo(0, 0)
+    }
+
     return (
         <>
             <HeaderBar
@@ -40,6 +45,12 @@ const Header = () => {
                 onModal={showModalHandler}
                 onSignUp={signUpModalHandler}
             />
+            <Button
+                className="fixed z-20 duration-300 left-10 bottom-10 rotate-90 h-10 w-10 rounded-lg hover:text-yy shadow-2m hover:shadow-3m"
+                onClick={handlerToTop}
+            >
+                {`<`}
+            </Button>
 
             {showModal && !signModal && (
                 <NavBar
@@ -48,7 +59,7 @@ const Header = () => {
                     onModal={showModalHandler}
                     onSign={signModalHandler}
                     onSignUp={signUpModalHandler}
-                    onsSignOut={() => {
+                    onSignOut={() => {
                         signChange()
                         showModalHandler()
                     }}

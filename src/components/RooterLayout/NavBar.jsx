@@ -33,12 +33,20 @@ const NavBar = ({
                         <Link to="/" onClick={showModal}>
                             <img
                                 alt="LOGO"
-                                src="/img/IMG_logo02.png"
+                                // src="/img/IMG_logo02.png"
+                                src="http://localhost:3000/images/IMG_logo02.png"
                                 className="mx-auto w-36 pb-4 cursor-pointer "
                             />
                         </Link>
                         {/* <hr className="mb-6 w-4/5 mx-auto" /> */}
                         <div className="flex flex-col py-1 text-xl">
+                            <Link
+                                to="/about"
+                                onClick={showModal}
+                                className={nav_link}
+                            >
+                                關於我們
+                            </Link>
                             <Link
                                 to="/plants"
                                 onClick={showModal}
@@ -53,20 +61,16 @@ const NavBar = ({
                             >
                                 遊戲
                             </Link>
-                            <Link
-                                to="/special"
-                                onClick={showModal}
-                                className={nav_link}
-                            >
-                                宣傳
-                            </Link>
-                            <Link
-                                to="/about"
-                                onClick={showModal}
-                                className={nav_link}
-                            >
-                                關於我們
-                            </Link>
+
+                            {isSign && (
+                                <Link
+                                    to="/special"
+                                    onClick={showModal}
+                                    className={nav_link}
+                                >
+                                    宣傳
+                                </Link>
+                            )}
                         </div>
 
                         {!isSign && (

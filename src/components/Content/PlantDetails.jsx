@@ -1,4 +1,4 @@
-import { useLoaderData, Link } from 'react-router-dom'
+// import { useLoaderData, Link } from 'react-router-dom'
 
 import Modal from '../Modal/Modal'
 import { useEffect } from 'react'
@@ -7,9 +7,9 @@ import ProgressBar from './ProgressBar'
 
 const TIMER = 8000
 
-const PlantsDetails = ({ onPlant, no, plantModal }) => {
-    const post = useLoaderData()
-    const postNo = post[no - 1]
+const PlantsDetails = ({ plants, onPlant, no, plantModal }) => {
+    // const post = useLoaderData()
+    const postNo = plants[no - 1]
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -21,21 +21,21 @@ const PlantsDetails = ({ onPlant, no, plantModal }) => {
         }
     }, [onPlant])
 
-    if (!post) {
-        return (
-            <>
-                <main className="">
-                    <h1>資料錯誤...</h1>
-                    <p>資料無法找到...</p>
-                    <p>
-                        <Link to="/" className="">
-                            首頁
-                        </Link>
-                    </p>
-                </main>
-            </>
-        )
-    }
+    // if (!post) {
+    //     return (
+    //         <>
+    //             <main className="">
+    //                 <h1>資料錯誤...</h1>
+    //                 <p>資料無法找到...</p>
+    //                 <p>
+    //                     <Link to="/" className="">
+    //                         首頁
+    //                     </Link>
+    //                 </p>
+    //             </main>
+    //         </>
+    //     )
+    // }
 
     return (
         <>
@@ -51,7 +51,8 @@ const PlantsDetails = ({ onPlant, no, plantModal }) => {
                         <div className="w-[95%] mx-auto my-auto">
                             <img
                                 className=" w-80 max-xl:w-52 max-sm:w-36 mx-auto mt-5"
-                                src={postNo.img}
+                                // src={postNo.img}
+                                src={`http://localhost:3000/${postNo.img}`}
                             />
                             <h3 className="my-2">{postNo.name}</h3>
 

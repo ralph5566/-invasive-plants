@@ -1,12 +1,12 @@
 import Content from '../../components/Content/Content'
 // import { Outlet } from 'react-router-dom'
 
-function App({ onLogin }) {
+function App() {
     return (
         <>
             {/* <Outlet /> */}
             <main>
-                <Content onLogin={onLogin} />
+                <Content />
             </main>
         </>
     )

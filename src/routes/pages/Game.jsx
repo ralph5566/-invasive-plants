@@ -1,11 +1,13 @@
 import { useLoaderData } from 'react-router-dom'
 import GameBoard from '../../components/GameBorad/GameBoard'
 import { useState } from 'react'
+// import questions from '../../../public/questions'
 
 const Game = () => {
     const [startGame, setStartGame] = useState(false)
 
     const post = useLoaderData()
+    // const post = questions
     const shuffledQuestions = post.sort(() => Math.random() - 0.5)
     console.log(shuffledQuestions.map((q) => q.no))
 
@@ -22,7 +24,8 @@ const Game = () => {
                             <div className="flex flex-col h-full bg-bgcB">
                                 <img
                                     alt="logo"
-                                    src="/img/IMG_logo03.png"
+                                    // src="/img/IMG_logo03.png"
+                                    src={`http://localhost:3000/images/IMG_logo03.png`}
                                     className="w-1/6 mt-48 mx-auto max-md:w-1/2 max-sss:mt-10"
                                 />
                                 <h1 className="mt-5 text-3xl font-[900] text-yy">
