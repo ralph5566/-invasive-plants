@@ -19,8 +19,8 @@ const Content = () => {
 
 export default Content
 
-export async function Loader() {
-    const response = await fetch('http://localhost:3000/plants')
-    const resData = await response.json()
-    return resData.plants
-}
+// export async function Loader() {
+//     const response = await fetch('http://localhost:3000/plants')
+//     const resData = await response.json()
+//     return resData.plants
+// }

@@ -1,7 +1,10 @@
 import { useState } from 'react'
+// import { useRouteLoaderData } from 'react-router-dom'
 import SpecialDetail from '../../components/Special/SpecailDetail'
 
 const Special = () => {
+    // const token = useRouteLoaderData('root')
+
     const [showModal, setShowModal] = useState(false)
     const [imgNo, setImgNo] = useState('')
 

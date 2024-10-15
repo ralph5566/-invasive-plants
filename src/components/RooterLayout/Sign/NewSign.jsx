@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Form } from 'react-router-dom'
+import { Form, json, redirect } from 'react-router-dom'
 
 import Modal from '../../Modal/Modal'
 import Input from '../../Tools/Input'
@@ -52,7 +52,17 @@ function Sign({ onCancel, showModal }) {
                 user: customerData,
             }),
         })
+
+        if (response.status === 422 || response.status === 401) {
+            return response
+        }
+        if (!response.ok) {
+            setError('Could not authenticate')
+            throw json({ message: 'Could not authenticate' }, { status: 500 })
+        }
+
         if (response.ok) {
+            redirect('/')
             onCancel()
         }
     }
@@ -106,7 +116,7 @@ function Sign({ onCancel, showModal }) {
                         <Button type="submit">註 冊</Button>
                         <button
                             type="button"
-                            className=" text-center  cursor-pointer px-6 py-0.5 rounded-lg border-none bg-purple hover:bg-hoverPup hover:text-yy"
+                            className=" text-center cursor-pointer px-6 py-0.5 rounded-lg border-none bg-purple hover:bg-hoverPup hover:text-tahiti"
                             onClick={onCancel}
                         >
                             關 閉

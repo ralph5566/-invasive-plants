@@ -1,6 +1,4 @@
-// import { useState, useEffect } from 'react'
-import { Link, useLoaderData } from 'react-router-dom'
-import { useState } from 'react'
+import { Link, useParams, useRouteLoaderData } from 'react-router-dom'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules'
@@ -12,20 +10,37 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 
 import Plants from '../../components/Plants/Plants'
+import { useDispatch, useSelector } from 'react-redux'
 // import PLANTS from '../../../public/plants'
+
+import { plantNoActions } from '../../redux/PlantNo'
 
 function Illustrate() {
     const screenW = Math.floor(document.documentElement.clientWidth / 250)
-    const plants = useLoaderData()
+
+    const plants = useRouteLoaderData('plants-detail')
+    const plantsNo = useSelector((state) => state.plantNo.no)
+    const dispatch = useDispatch()
+    const params = useParams()
+
     // const plants = PLANTS
 
-    const [no, setNo] = useState('0')
+    console.log(plantsNo)
+    console.log(params.plantNo)
 
-    let plantNo = plants[no]
+    const initialPlant =
+        params.plantNo !== undefined ? params.plantNo : plantsNo
+    const NO = plants.findIndex((plant) => {
+        return plant.no === initialPlant
+    })
 
-    function plantHandler(index) {
-        console.log(index)
-        setNo(index)
+    console.log(NO)
+
+    let plantNo = plants[NO]
+
+    function plantHandler(index, plantNo, event) {
+        event.preventDefault()
+        dispatch(plantNoActions.setNo(plantNo))
     }
 
     return (
@@ -33,7 +48,6 @@ function Illustrate() {
             <Plants
                 buttons={
                     <Swiper
-                        // className=""
                         modules={[Navigation, Pagination, Scrollbar, A11y]}
                         spaceBetween={1}
                         slidesPerView={screenW}
@@ -46,10 +60,12 @@ function Illustrate() {
                         {plants.map((plant, index) => (
                             <SwiperSlide key={plant.no}>
                                 <Link
-                                    to={`/plants?${plant.no}`}
+                                    to={`/plants/${plant.no}`}
                                     className="mx-20"
                                     key={plant.no}
-                                    onClick={() => plantHandler(index)}
+                                    onClick={() =>
+                                        plantHandler(index, plant.no, event)
+                                    }
                                 >
                                     <img
                                         // src={plant.img}

@@ -1,12 +1,15 @@
-import { Form } from 'react-router-dom'
-import { useContext, useState } from 'react'
+import { Form, redirect, useNavigation } from 'react-router-dom'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 import Modal from '../../Modal/Modal'
 import Input from '../../Tools/Input'
 import Button from '../../Tools/Button'
-import CheckSign from '../../../Context/Sign'
+// import CheckSign from '../../../Context/Sign'
 import { useInput } from '../../../hook/useInput'
 import { hasMinLength } from '../../../util/validation'
+import { authActions } from '../../../redux/Sign'
+
 // import useHttp from '../../../hook/useHttp'
 
 // const requestConfig = {
@@ -17,8 +20,14 @@ import { hasMinLength } from '../../../util/validation'
 // }
 
 function Sign({ signModal, onSign }) {
-    let { signChange } = useContext(CheckSign)
+    // let { signChange } = useContext(CheckSign)
+    // const data = useActionData()
+    // const submit = useSubmit()
+    const dispatch = useDispatch()
+    const navigation = useNavigation()
+
     const [error, setError] = useState()
+    const isSubmitting = navigation.state === 'submitting'
 
     // const {
     //     data,
@@ -106,24 +115,23 @@ function Sign({ signModal, onSign }) {
                 user: customerData,
             }),
         })
-        console.log(response.error)
+        console.log(response.errors)
 
         if (response.ok) {
-            signChange(customerData)
+            // signChange(customerData)
+            dispatch(authActions.login())
+
+            localStorage.setItem('token', customerData.account)
+            const expiration = new Date()
+            expiration.setHours(expiration.getHours() + 1)
+            localStorage.setItem('expiration', expiration.toISOString())
+
+            redirect('/')
             onSign()
         } else {
             setError(response.message)
         }
     }
-
-    // function signHandler() {
-    //     signChange()
-    //     onSign()
-    // }
-
-    // if (isSign) {
-    //     onSign()
-    // }
 
     return (
         <>
@@ -160,10 +168,12 @@ function Sign({ signModal, onSign }) {
                     />
 
                     <p className="flex justify-end max-lg:justify-center gap-2 mt-8 max-sm:mt-6">
-                        <Button type="submit">登 入</Button>
+                        <Button disabled={isSubmitting} type="submit">
+                            {isSubmitting ? '傳送中...' : '登 入'}
+                        </Button>
                         <button
                             type="button"
-                            className=" text-center cursor-pointer px-6 py-0.5 rounded-lg border-none bg-purple hover:bg-hoverPup hover:text-yy"
+                            className="duration-200 text-center cursor-pointer px-6 py-0.5 rounded-lg border-none bg-purple hover:bg-hoverPup hover:text-tahiti"
                             onClick={onSign}
                         >
                             關 閉

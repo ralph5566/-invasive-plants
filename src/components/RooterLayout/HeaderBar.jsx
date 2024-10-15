@@ -1,18 +1,41 @@
-import { Link } from 'react-router-dom'
-import { useContext } from 'react'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
-import CheckSign from '../../Context/Sign'
+// import { useContext } from 'react'
+// import CheckSign from '../../Context/Sign'
+import { authActions } from '../../redux/Sign'
 
-const HeaderBar = ({ onSign, onModal, onSignUp }) => {
-    const { isSign, signChange } = useContext(CheckSign)
-    let nav_link = 'pointer-events-auto text-lg mr-4 cursor-pointer'
-    const isActive = false
+import { useDispatch, useSelector } from 'react-redux'
+import { plantNoActions } from '../../redux/PlantNo'
+// import { showBarActions } from '../../redux/showBarModal'
 
-    if (!isActive) {
-        nav_link += ' text-lightBlue'
-    } else {
-        nav_link += ' text-yy'
+const HeaderBar = ({ onSign, onSignUp, onShowBar }) => {
+    // const { isSign, signChange } = useContext(CheckSign)
+    const isSign = useSelector((state) => state.isAuth.isSign)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    let nav_link =
+        ' text-lg mr-4 duration-200 text-lightBlue hover:underline hover:underline-offset-8 '
+
+    let nav_active = 'text-lg mr-4 text-yy underline underline-offset-8 '
+
+    function LogoutHandler(evt) {
+        evt.preventDefault()
+        localStorage.removeItem('token')
+        localStorage.removeItem('expiration')
+        dispatch(authActions.logout())
+        navigate('/')
     }
+
+    function plantsHandler(evt) {
+        evt.preventDefault()
+        dispatch(plantNoActions.setNo('01'))
+        navigate('/plants')
+    }
+
+    // const showBarHandler = () => {
+    //     dispatch(showBarActions.onShow())
+    // }
 
     return (
         <>
@@ -26,42 +49,67 @@ const HeaderBar = ({ onSign, onModal, onSignUp }) => {
                             alt="LOGO"
                         />
                     </Link>
-                    <Link className={nav_link} to="/about">
+                    <NavLink
+                        to="/about"
+                        className={({ isActive }) =>
+                            isActive ? nav_active : nav_link
+                        }
+                    >
                         關於我們
-                    </Link>
-                    <Link to="/plants" className={nav_link}>
+                    </NavLink>
+                    <NavLink
+                        to="/plants"
+                        className={({ isActive }) =>
+                            isActive ? nav_active : nav_link
+                        }
+                        onClick={plantsHandler}
+                    >
                         圖鑑
-                    </Link>
-                    <Link className={nav_link} to="/game">
+                    </NavLink>
+                    <NavLink
+                        to="/game"
+                        className={({ isActive }) =>
+                            isActive ? nav_active : nav_link
+                        }
+                    >
                         遊戲
-                    </Link>
+                    </NavLink>
 
                     {isSign && (
-                        <Link className={nav_link} to="/special">
+                        <NavLink
+                            className={({ isActive }) =>
+                                isActive ? nav_active : nav_link
+                            }
+                            to="/special"
+                        >
                             宣傳
-                        </Link>
+                        </NavLink>
                     )}
                 </ul>
 
                 <ul className="inline-flex items-center">
                     {!isSign && (
                         <>
-                            <li className=" text-lightBlue mr-5 cursor-pointer shadow-2m  hover:shadow-3m">
-                                <button
-                                    onClick={onSign}
-                                    className="text-lg rounded-lg border-none px-6 py-1"
-                                >
-                                    登入
-                                </button>
-                            </li>
-                            <li className=" text-lightBlue mr-5 cursor-pointer shadow-2m hover:shadow-3m">
-                                <button
-                                    onClick={onSignUp}
-                                    className="text-lg rounded-lg border-none px-6 py-1"
-                                >
-                                    註冊
-                                </button>
-                            </li>
+                            <Link to="?sign">
+                                <li className="duration-200 text-lightBlue mr-5 shadow-2m hover:shadow-3m">
+                                    <button
+                                        onClick={onSign}
+                                        className="text-lg rounded-lg border-none px-6 py-1"
+                                    >
+                                        登入
+                                    </button>
+                                </li>
+                            </Link>
+                            <Link to="?newSign">
+                                <li className="duration-200 text-lightBlue mr-5  shadow-2m hover:shadow-3m">
+                                    <button
+                                        onClick={onSignUp}
+                                        className="text-lg rounded-lg border-none px-6 py-1"
+                                    >
+                                        註冊
+                                    </button>
+                                </li>
+                            </Link>
                         </>
                     )}
                     {isSign && (
@@ -69,7 +117,7 @@ const HeaderBar = ({ onSign, onModal, onSignUp }) => {
                             <li className=" text-lightBlue mr-5 cursor-pointer shadow-2m hover:shadow-3m">
                                 <button
                                     className="text-lg rounded-lg border-none px-6 py-1"
-                                    onClick={() => signChange()}
+                                    onClick={(evt) => LogoutHandler(evt)}
                                 >
                                     登出
                                 </button>
@@ -81,13 +129,20 @@ const HeaderBar = ({ onSign, onModal, onSignUp }) => {
             </header>
 
             <header className="hidden max-md:flex justify-center p-20 w-full border-b-4 border-yy bg-black">
-                <button className=" absolute mt-auto right-5" onClick={onModal}>
-                    {/* <img src="/img/IMG_bar.png" alt="bar" /> */}
-                    <img
-                        src="http://localhost:3000/images/IMG_bar.png"
-                        alt="bar"
-                    />
-                </button>
+                <Link to="?navBar">
+                    <button
+                        className=" absolute mt-auto right-5"
+                        type="button"
+                        onClick={() => onShowBar()}
+                    >
+                        {/* <img src="/img/IMG_bar.png" alt="bar" /> */}
+                        <img
+                            src="http://localhost:3000/images/IMG_bar.png"
+                            alt="bar"
+                        />
+                    </button>
+                </Link>
+
                 <Link to="/">
                     <img
                         alt="LOGO"

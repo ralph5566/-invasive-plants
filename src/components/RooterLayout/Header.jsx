@@ -1,33 +1,52 @@
-import { useCallback, useContext, useState } from 'react'
+import { useCallback, useState } from 'react'
 
-import CheckSign from '../../Context/Sign'
+// import CheckSign from '../../Context/Sign'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+
 import NavBar from './NavBar'
 import Sign from './Sign/Sign'
 import NewSign from './Sign/NewSign'
 import HeaderBar from './HeaderBar'
 import Button from '../Tools/Button'
+import { authActions } from '../../redux/Sign'
+// import { showBarActions } from '../../redux/showBarModal'
 
 const Header = () => {
-    const { isSign, signChange } = useContext(CheckSign)
+    // const { isSign, signChange } = useContext(CheckSign)
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    // const showModal = useSelector((state) => state.showBar.isShow)
+
     const [showModal, setShowModal] = useState(false)
     const [signModal, setSignModal] = useState(false)
     const [signUpModal, setSignUpModal] = useState(false)
 
-    const showModalHandler = useCallback(
-        function showModalHandler() {
-            setShowModal(!showModal)
-        },
-        [showModal]
-    )
+    const barShowHandler = useCallback(function showModalHandler() {
+        console.log('show')
+        setShowModal(true)
+    }, [])
+
+    const barCloseHandler = useCallback(function showModalHandler() {
+        console.log('show')
+        setShowModal(false)
+    }, [])
+
     const signModalHandler = useCallback(
         function signModalHandler() {
-            setSignModal(!signModal)
+            console.log('sign')
+            // console.log(signModal)
+            setSignModal(() => !signModal)
             setShowModal(false)
         },
         [signModal]
     )
+
     const signUpModalHandler = useCallback(
         function signUpModalHandler() {
+            console.log('signUp')
             setSignUpModal(() => !signUpModal)
             setShowModal(false)
         },
@@ -42,8 +61,8 @@ const Header = () => {
         <>
             <HeaderBar
                 onSign={signModalHandler}
-                onModal={showModalHandler}
                 onSignUp={signUpModalHandler}
+                onShowBar={barShowHandler}
             />
             <Button
                 className="fixed z-20 duration-300 left-10 bottom-10 rotate-90 h-10 w-10 rounded-lg hover:text-yy shadow-2m hover:shadow-3m"
@@ -52,28 +71,37 @@ const Header = () => {
                 {`<`}
             </Button>
 
-            {showModal && !signModal && (
+            {showModal && (
                 <NavBar
-                    isSign={isSign}
                     showModal={showModal}
-                    onModal={showModalHandler}
+                    onBarClose={barCloseHandler}
                     onSign={signModalHandler}
                     onSignUp={signUpModalHandler}
                     onSignOut={() => {
-                        signChange()
-                        showModalHandler()
+                        dispatch(authActions.logout())
+                        localStorage.removeItem('token')
+                        localStorage.removeItem('expiration')
+                        barCloseHandler()
+                        navigate('/')
+                        // signChange()
+                        // dispatch(showBarActions.onShow())
                     }}
                 />
             )}
 
-            {signModal && !showModal && (
-                <Sign onSign={signModalHandler} signModal={signModal} />
+            {signModal && (
+                <Sign
+                    onSign={signModalHandler}
+                    signModal={signModal}
+                    method="POST"
+                />
             )}
 
             {signUpModal && (
                 <NewSign
                     onCancel={signUpModalHandler}
                     showModal={signUpModal}
+                    method="PATCH"
                 />
             )}
         </>

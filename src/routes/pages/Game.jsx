@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom'
+import { json, useLoaderData } from 'react-router-dom'
 import GameBoard from '../../components/GameBorad/GameBoard'
 import { useState } from 'react'
 // import questions from '../../../public/questions'
@@ -52,6 +52,16 @@ export default Game
 
 export async function Loader() {
     const response = await fetch('http://localhost:3000/q')
-    const resData = await response.json()
-    return resData.questions
+
+    if (!response.ok) {
+        return json(
+            { message: '無法連結網頁' },
+            {
+                status: 500,
+            }
+        )
+    } else {
+        const resData = await response.json()
+        return resData.questions
+    }
 }
